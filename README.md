@@ -12,8 +12,6 @@ Note that the backend server soft-depends on `frontend/build` to exist with a bu
 
 ## Production Deployment
 
-For a production deployment, `yarn build`, check the results and commit, and `yarn deploy`.
-
-Note that for the sake of simplicity, the frontend is built manually ahead-of-time and committed to the repo for the actual deployment. Yep, this isn't ideal.
+For a production deployment, `yarn deploy`. The frontend and backend should get built properly.
 
 This project is served at <http://fullstack-phonebook-walther.herokuapp.com/>
