@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
+const cors = require("cors");
+app.use(cors());
 
 const morgan = require("morgan");
 
@@ -44,7 +46,7 @@ let persons = [
 // NOTE: I would much, much prefer using UUIDv4 or similar here
 // but i will do as the exercise instructions say.
 const generateId = () => {
-  const newId = Math.floor(Math.random() * 1_000_000_000);
+  const newId = Math.floor(Math.random() * 1e9);
   if (persons.find((person) => person.id === newId)) {
     return generateId();
   }

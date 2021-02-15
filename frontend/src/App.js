@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { PersonForm, PersonFilterForm, PersonList } from "./Person";
 import personService from "./services/persons";
 import { Notification } from "./Notification";
@@ -70,7 +69,7 @@ const App = () => {
         .remove(id)
         .then((response) => {
           // Delete from local view too
-          setPersons(persons.filter((person) => person.id != id));
+          setPersons(persons.filter((person) => person.id !== id));
           showNotification("success", `${name} deleted successfully`);
         })
         .catch((error) => {
@@ -101,7 +100,7 @@ const App = () => {
         })
         .catch((error) => {
           console.error(error);
-          showNotification("error", `Error deleting person: ${error}`);
+          showNotification("error", `Error updating person: ${error}`);
         });
     }
   };

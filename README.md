@@ -1,2 +1,5 @@
 # full-stack-open-phonebook
-Phonebook backend for the Part 3 of Full Stack Open course
+
+- `backend/` contains the backend, start local dev with `cd backend; yarn run dev`
+- `frontend/` contains the frontend, start it with `cd frontend; yarn start`
+
