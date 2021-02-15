@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
+
+app.use(express.static("../frontend/build"));
+
 const cors = require("cors");
 app.use(cors());
 
 const morgan = require("morgan");
-
 morgan.token("body", function (req, res) {
   // Optionally, this could also have a check on method being POST,
   // but I think it's more elegant to always have the object on the log lines.
@@ -52,10 +54,6 @@ const generateId = () => {
   }
   return newId;
 };
-
-app.get("/", (req, res) => {
-  res.send("<h1>Hello World!</h1>");
-});
 
 app.get("/info", (req, res) => {
   const now = new Date();
