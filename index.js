@@ -3,7 +3,20 @@ const app = express();
 app.use(express.json());
 
 const morgan = require("morgan");
-app.use(morgan("tiny"));
+
+morgan.token("body", function (req, res) {
+  // Optionally, this could also have a check on method being POST,
+  // but I think it's more elegant to always have the object on the log lines.
+  // This way any possible log parsing would be simpler - less special casing.
+  if ((req.body !== undefined) & (req.body !== "")) {
+    return JSON.stringify(req.body);
+  }
+  return "{}";
+});
+
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms :body")
+);
 
 let persons = [
   {
@@ -72,7 +85,6 @@ app.delete("/api/persons/:id", (request, response) => {
 
 app.post("/api/persons", (request, response) => {
   const body = request.body;
-  console.log(body);
 
   if (!body.name) {
     return response.status(400).json({
