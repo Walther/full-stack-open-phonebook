@@ -1,0 +1,19 @@
+{
+  "name": "full-stack-open-phonebook",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:Walther/full-stack-open-phonebook.git",
+  "author": "Walther <veeti.haapsamo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
