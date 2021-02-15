@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
 
 let persons = [
   {
@@ -23,6 +24,16 @@ let persons = [
     id: 4,
   },
 ];
+
+// NOTE: I would much, much prefer using UUIDv4 or similar here
+// but i will do as the exercise instructions say.
+const generateId = () => {
+  const newId = Math.floor(Math.random() * 1_000_000_000);
+  if (persons.find((person) => person.id === newId)) {
+    return generateId();
+  }
+  return newId;
+};
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello World!</h1>");
@@ -54,6 +65,39 @@ app.delete("/api/persons/:id", (request, response) => {
   persons = persons.filter((person) => person.id !== id);
 
   response.status(204).end();
+});
+
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+  console.log(body);
+
+  if (!body.name) {
+    return response.status(400).json({
+      error: "name missing",
+    });
+  }
+
+  if (!body.number) {
+    return response.status(400).json({
+      error: "number missing",
+    });
+  }
+
+  if (persons.find((person) => person.name === body.name)) {
+    return response.status(400).json({
+      error: "name must be unique",
+    });
+  }
+
+  const person = {
+    name: body.name,
+    number: body.number,
+    id: generateId(),
+  };
+
+  persons = persons.concat(person);
+
+  response.json(person);
 });
 
 const PORT = process.env.PORT || 3001;
