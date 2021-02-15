@@ -1,1 +1,1 @@
-web: pushd frontend; yarn build --release; popd; yarn start
+web: pushd frontend; yarn; yarn build --release; popd; yarn start
