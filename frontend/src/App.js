@@ -47,7 +47,10 @@ const App = () => {
       })
       .catch((error) => {
         console.error(error);
-        showNotification("error", `Error adding person: ${error}`);
+        showNotification(
+          "error",
+          `Error adding person: ${JSON.stringify(error.response.data)}`
+        );
       });
   };
 
@@ -74,11 +77,9 @@ const App = () => {
         })
         .catch((error) => {
           console.error(error);
-          // Naive assumption: deleted already. We could do statuscode checking etc
-          // but leaving that out of scope for now.
           showNotification(
             "error",
-            `Information of ${name} already deleted from the server`
+            `Error deleting ${name}: ${JSON.stringify(error.response.data)}`
           );
         });
     }
@@ -100,7 +101,10 @@ const App = () => {
         })
         .catch((error) => {
           console.error(error);
-          showNotification("error", `Error updating person: ${error}`);
+          showNotification(
+            "error",
+            `Error updating person: ${JSON.stringify(error.response.data)}`
+          );
         });
     }
   };
@@ -109,7 +113,7 @@ const App = () => {
     setNotification({ status, message });
     setTimeout(() => {
       clearNotification();
-    }, 3000);
+    }, 5000);
   };
   const clearNotification = () => {
     setNotification({ status: "", message: "" });

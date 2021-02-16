@@ -25,13 +25,15 @@ mongoose
     console.log("error connecting to MongoDB:", error.message);
   });
 
+const uniqueValidator = require("mongoose-unique-validator");
+
 // Schema stuff
 const personSchema = new mongoose.Schema({
-  // Names are strings
-  name: String,
-  // Phone numbers can have weird formatting stuff, just store as a string
-  number: String,
+  name: { type: String, required: true, unique: true, minLength: 3 },
+  number: { type: String, required: true, minLength: 8 },
 });
+
+personSchema.plugin(uniqueValidator);
 
 personSchema.set("toJSON", {
   transform: (document, returnedObject) => {
