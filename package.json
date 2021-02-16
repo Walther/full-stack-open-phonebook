@@ -10,6 +10,7 @@
     "dev": "nodemon index.js",
     "build": "cd frontend; yarn; yarn build; cd ..;",
     "deploy": "git push heroku main",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -21,6 +22,8 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-plugin-react": "^7.22.0",
     "nodemon": "^2.0.7"
   }
 }
